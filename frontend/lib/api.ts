@@ -5,12 +5,14 @@ function getApiBase(): string {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  // In the browser, use relative paths so everything runs on the exact same port and URL (e.g. localhost:3000)
+  // In the browser, use relative paths — Vercel edge rewrites /api/* to backend service,
+  // and locally Next.js rewrites /api/* to localhost:5000 (see next.config.mjs).
   if (typeof window !== "undefined") {
     return "";
   }
-  // On the server side, query local backend
-  return "http://localhost:5000";
+  // On the server side (SSR / RSC), use the binding URL injected by Vercel services,
+  // falling back to localhost for local development.
+  return process.env.BACKEND_URL || "http://localhost:5000";
 }
 
 export interface ContactPayload {

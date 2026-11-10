@@ -16,6 +16,11 @@ const nextConfig = {
     ],
   },
   async rewrites() {
+    // Local dev only: proxy /api/* to the Express backend running on port 5000.
+    // On Vercel, the top-level vercel.json rewrites handle routing before Next.js sees the request.
+    if (process.env.NODE_ENV === "production") {
+      return [];
+    }
     return [
       {
         source: "/api/:path*",
