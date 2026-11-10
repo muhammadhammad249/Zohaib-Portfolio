@@ -1,7 +1,17 @@
 import { profileData } from "@/data/profile";
 import { projectsData } from "@/data/projects";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+function getApiBase(): string {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  // In the browser, use relative paths so everything runs on the exact same port and URL (e.g. localhost:3000)
+  if (typeof window !== "undefined") {
+    return "";
+  }
+  // On the server side, query local backend
+  return "http://localhost:5000";
+}
 
 export interface ContactPayload {
   name: string;
@@ -28,8 +38,9 @@ export interface GithubRepo {
 }
 
 export async function submitContactForm(payload: ContactPayload): Promise<ApiResponse> {
+  const base = getApiBase();
   try {
-    const res = await fetch(`${API_BASE}/api/contact`, {
+    const res = await fetch(`${base}/api/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,15 +66,15 @@ export async function submitContactForm(payload: ContactPayload): Promise<ApiRes
 }
 
 export async function getGithubRepos(): Promise<GithubRepo[]> {
+  const base = getApiBase();
   try {
-    const res = await fetch(`${API_BASE}/api/github/repos`, {
+    const res = await fetch(`${base}/api/github/repos`, {
       next: { revalidate: 600 },
     });
     if (!res.ok) throw new Error("Failed to fetch GitHub repositories");
     const json = await res.json();
     return json.data || [];
   } catch (error) {
-    // Fallback static repos
     return [
       {
         name: "flutter-fintech-wallet",
@@ -98,8 +109,9 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
 }
 
 export async function getProfile() {
+  const base = getApiBase();
   try {
-    const res = await fetch(`${API_BASE}/api/profile`, {
+    const res = await fetch(`${base}/api/profile`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error("Failed to fetch remote profile");
@@ -111,8 +123,9 @@ export async function getProfile() {
 }
 
 export async function getProjects() {
+  const base = getApiBase();
   try {
-    const res = await fetch(`${API_BASE}/api/projects`, {
+    const res = await fetch(`${base}/api/projects`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error("Failed to fetch remote projects");
@@ -122,4 +135,3 @@ export async function getProjects() {
     return projectsData;
   }
 }
-
