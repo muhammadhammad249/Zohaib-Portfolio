@@ -1,0 +1,19 @@
+{
+  "name": "zohaib-portfolio-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production portfolio for Zohaib Rukhsar - Flutter & Android Developer",
+  "scripts": {
+    "dev": "concurrently -n \"backend,frontend\" -c \"magenta,cyan\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build": "npm run build:frontend",
+    "lint:frontend": "npm run lint --prefix frontend",
+    "lint": "npm run lint:frontend",
+    "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}
