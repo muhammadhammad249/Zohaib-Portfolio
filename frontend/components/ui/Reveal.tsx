@@ -15,9 +15,9 @@ interface RevealProps {
 export function Reveal({
   children,
   delay = 0,
-  duration = 0.5,
+  duration = 0.4,
   className,
-  yOffset = 20,
+  yOffset = 16,
 }: RevealProps) {
   const reducedMotion = useReducedMotion();
 
@@ -29,8 +29,8 @@ export function Reveal({
     <motion.div
       initial={{ opacity: 0, y: yOffset }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1.0] }}
+      viewport={{ once: true, margin: "0px" }}
+      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}

@@ -37,7 +37,7 @@ export const profileData: Profile = {
   phone: "+92 342 0442565",
   whatsappUrl: "https://wa.me/923420442565",
   githubUrl: "https://github.com/zohaib-malik6",
-  avatarUrl: "https://github.com/zohaib-malik6.png",
+  avatarUrl: "/avatar.png",
   resumePath: "/Zohaib_Rukhsar_Resume_Flutter_Developer.pdf",
   languages: [
     { name: "Urdu", proficiency: "Native" },

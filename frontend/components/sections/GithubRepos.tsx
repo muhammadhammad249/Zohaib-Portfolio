@@ -7,22 +7,51 @@ import { Reveal } from "@/components/ui/Reveal";
 import { getGithubRepos, GithubRepo } from "@/lib/api";
 import { Github, Star, GitFork, ExternalLink, Code2 } from "lucide-react";
 
+const INITIAL_REPOS: GithubRepo[] = [
+  {
+    name: "flutter-fintech-wallet",
+    description: "Fintech mobile wallet implementation with BLoC state management and REST API integration.",
+    language: "Dart",
+    stars: 3,
+    url: "https://github.com/zohaib-malik6",
+  },
+  {
+    name: "qr-vertex-android",
+    description: "Native Android application for QR code generation and barcode scanning with Kotlin and XML.",
+    language: "Kotlin",
+    stars: 2,
+    url: "https://github.com/zohaib-malik6",
+  },
+  {
+    name: "still-blink-mobile",
+    description: "Cross-platform mobile application built with Flutter, Dart and BLoC architecture.",
+    language: "Dart",
+    stars: 1,
+    url: "https://github.com/zohaib-malik6",
+  },
+  {
+    name: "nectar-ui-flutter",
+    description: "Grocery e-commerce responsive UI case study featuring custom animated Flutter widgets.",
+    language: "Dart",
+    stars: 2,
+    url: "https://github.com/zohaib-malik6",
+  },
+];
+
 export function GithubRepos() {
-  const [repos, setRepos] = useState<GithubRepo[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [repos, setRepos] = useState<GithubRepo[]>(INITIAL_REPOS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
     async function loadRepos() {
       try {
         const data = await getGithubRepos();
-        if (isMounted) {
+        if (isMounted && data.length > 0) {
           setRepos(data.slice(0, 4));
         }
       } catch (err) {
         console.error("Failed to load GitHub repos", err);
-      } finally {
-        if (isMounted) setLoading(false);
       }
     }
     loadRepos();

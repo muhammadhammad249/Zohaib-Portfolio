@@ -21,9 +21,9 @@ export function Bubble({
 
   const sizeClasses = {
     sm: "w-48 h-48 blur-2xl",
-    md: "w-72 h-72 md:w-96 md:h-96 blur-3xl",
-    lg: "w-96 h-96 md:w-[32rem] md:h-[32rem] blur-[90px]",
-    xl: "w-[28rem] h-[28rem] md:w-[42rem] md:h-[42rem] blur-[110px]",
+    md: "w-72 h-72 md:w-80 md:h-80 blur-2xl",
+    lg: "w-80 h-80 md:w-96 md:h-96 blur-3xl",
+    xl: "w-96 h-96 md:w-[28rem] md:h-[28rem] blur-3xl",
   };
 
   const variantClasses = {
@@ -43,7 +43,7 @@ export function Bubble({
     <div
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute rounded-full select-none -z-10 transition-opacity duration-1000",
+        "pointer-events-none absolute rounded-full select-none -z-10 transition-opacity duration-700 transform-gpu will-change-transform",
         sizeClasses[size],
         variantClasses[variant],
         !reducedMotion ? animationClasses[animation] : "",
