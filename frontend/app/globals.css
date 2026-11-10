@@ -19,16 +19,20 @@ html {
 }
 
 body {
-  background-color: #FBE8EC; /* burgundy-100 / warm cream light */
-  color: #1A060C; /* burgundy-950 */
+  background-color: #FBE8EC;
+  /* burgundy-100 / warm cream light */
+  color: #1A060C;
+  /* burgundy-950 */
   font-family: var(--font-inter), sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
 .dark body {
-  background-color: #1A060C; /* burgundy-950 dark */
-  color: #FBE8EC; /* burgundy-100 text */
+  background-color: #1A060C;
+  /* burgundy-950 dark */
+  color: #FBE8EC;
+  /* burgundy-100 text */
 }
 
 /* GPU hardware acceleration for smooth 60fps scrolling */
@@ -60,4 +64,3 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #800020;
 }
-
